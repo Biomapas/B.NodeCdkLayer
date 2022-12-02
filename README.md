@@ -1,4 +1,4 @@
-# B.LambdaLayerCommon
+# B.NodeCdkLayer
 
 ![Pipeline](https://github.com/Biomapas/B.NodeCdkLayer/workflows/Pipeline/badge.svg?branch=master)
 
