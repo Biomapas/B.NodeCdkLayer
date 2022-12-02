@@ -5,9 +5,13 @@ CDK_CLI_PATH = '/opt/bin/node_modules/aws-cdk/bin/cdk'
 
 
 def handler(*args, **kwargs):
-    print(
-        subprocess.check_output([
-            CDK_CLI_PATH,
-            '--version',
-        ])
-    )
+    output = subprocess.check_output([
+        CDK_CLI_PATH,
+        '--version',
+    ])
+
+    print(output)
+
+    return {
+        'output': output
+    }
