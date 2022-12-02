@@ -4,7 +4,10 @@
 
 ### Description
 
-TODO
+This is a simple Lambda layer AWS CDK resource that contains `node` and `aws cdk cli` within. 
+This package is useful for lambda functions that want to run `aws cdk` commands within themselves.
+Imagine a scenario where you run `cdk deploy --all` command not within you local pc or a build environment
+but through a lambda function. This library would greatly help you.
 
 ### Remarks
 
@@ -51,7 +54,43 @@ pip install b-node-cdk-layer
 
 ### Usage & Examples
 
-TODO
+Simply create a lambda function with this layer:
+
+```python
+from aws_cdk.aws_lambda import Function
+from b_node_cdk_layer.node_cdk_layer import NodeCdkLayer
+
+Function(
+    scope=Stack(...),
+    id='Function',
+    
+    ...,
+  
+    layers=[NodeCdkLayer(Stack(...))],
+  
+    # Running node process requires more RAM and longer runtime.
+    timeout=Duration.minutes(1),
+    memory_size=512
+)
+```
+
+To run some node or cdk command, follow this example:
+
+```python
+import subprocess
+
+# This is the path to AWS CDK CLI. It comes from a NodeCDK layer, that is a custom-built layer using docker.
+CDK_CLI_PATH = '/opt/bin/node_modules/aws-cdk/bin/cdk'
+
+
+def handler(*args, **kwargs):
+    output = subprocess.check_output([
+        CDK_CLI_PATH,
+        '--version',
+    ])
+
+    print(output)
+```
 
 ### Testing
 

@@ -3,7 +3,7 @@ include LICENSE
 include README.md
 include HISTORY.md
 
-recursive-include b_node_cdk_layer/Dockerfile
+include b_node_cdk_layer/Dockerfile
 
 recursive-include b_node_cdk_layer *.py
 recursive-include b_node_cdk_layer *.txt
